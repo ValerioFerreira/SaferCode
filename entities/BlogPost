@@ -1,0 +1,44 @@
+{
+  "name": "BlogPost",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Engenharia de Software",
+        "Intelig\u00eancia de Dados",
+        "IA & Automa\u00e7\u00e3o",
+        "Cases de Sucesso"
+      ]
+    },
+    "cover_url": {
+      "type": "string"
+    },
+    "excerpt": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "published_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "published": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "title",
+    "category",
+    "excerpt",
+    "content"
+  ]
+}

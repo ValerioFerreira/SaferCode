@@ -1,0 +1,24 @@
+{
+  "name": "DiagnosticoLead",
+  "type": "object",
+  "properties": {
+    "nome": {
+      "type": "string"
+    },
+    "telefone": {
+      "type": "string"
+    },
+    "descricao": {
+      "type": "string"
+    },
+    "email_enviado": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "nome",
+    "telefone",
+    "descricao"
+  ]
+}
