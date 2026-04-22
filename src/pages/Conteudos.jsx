@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { base44 } from "@/api/base44Client";
+import { mockApi as base44 } from "@/api/mockApi";
 import SharedFooter from "@/components/landing/SharedFooter";
 
 const LOGO_WIDE = "https://media.base44.com/images/public/69dd69e08275bba8ff88aaa6/5556524c0_logo_safercode_wide.png";

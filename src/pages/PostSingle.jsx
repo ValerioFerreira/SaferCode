@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { mockApi as base44 } from "@/api/mockApi";
 import SharedFooter from "@/components/landing/SharedFooter";
 import ReactMarkdown from "react-markdown";
 
