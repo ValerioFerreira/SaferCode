@@ -1,53 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Building2, Truck, BarChart3, Globe } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import SharedFooter from "@/components/landing/SharedFooter";
 
-const CASES = [
-  {
-    icon: Building2,
-    sector: "Setor Público e Institucional",
-    client: "CBMPE · IACB",
-    cover: "https://images.unsplash.com/photo-1568992688065-536aad8a12f6?w=800&q=70",
-    problem: "Processos burocráticos físicos gerando filas, retrabalho e lentidão no atendimento ao cidadão. Emissão de certificados dependente de fluxos manuais e sujeita a erros.",
-    solution: "Digitalização completa dos processos críticos com plataforma web segura, emissão automatizada de certificados com QR Code de validação e painel administrativo com visão em tempo real das demandas.",
-    tags: ["Sistemas Web", "Certificados Digitais", "Gestão Pública", "UX Cidadão"],
-    accentColor: "#FFD700",
-  },
-  {
-    icon: Truck,
-    sector: "Logística e Gestão de Frotas",
-    client: "Setor de Transportes",
-    cover: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&q=70",
-    problem: "Falhas operacionais no controle de abastecimento, documentação descentralizada e impossibilidade de rastrear consumo e custos por veículo ou motorista.",
-    solution: "Sistema inteligente de gestão de frotas com controle de abastecimento em tempo real, gestão documental centralizada, alertas automatizados e relatórios de economia para tomada de decisão.",
-    tags: ["ERP Logístico", "Controle de Frotas", "Automação", "Dashboards"],
-    accentColor: "#4A90D9",
-  },
-  {
-    icon: BarChart3,
-    sector: "Business Intelligence Estratégico",
-    client: "RH & Logística",
-    cover: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=70",
-    problem: "Dados dispersos em múltiplas fontes (ERP, planilhas, sistemas legados) sem integração, impedindo análises consolidadas e causando decisões baseadas em informações defasadas.",
-    solution: "Arquitetura de Data Warehouse com ETL robusto, dashboards de alta complexidade em PowerBI e Looker para departamentos de RH e Logística, com KPIs em tempo real e visões históricas.",
-    tags: ["PowerBI", "Looker", "Data Warehouse", "ETL", "Machine Learning"],
-    accentColor: "#50C878",
-  },
-  {
-    icon: Globe,
-    sector: "Experiência Digital Premium",
-    client: "Hotelaria & E-commerce",
-    cover: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=70",
-    problem: "Presença digital abaixo do padrão da marca, afastando clientes de alto valor e comprometendo a percepção de exclusividade e confiança do negócio.",
-    solution: "Engenharia de front-end e web design de alto padrão unindo estética de luxo a uma infraestrutura técnica impecável — performance superior, SEO técnico e experiência de compra otimizada para conversão.",
-    tags: ["Web Design", "E-commerce", "Performance", "SEO Técnico", "UX Premium"],
-    accentColor: "#C084FC",
-  },
-];
+// CASES will be fetched dynamically
 
 export default function Projetos() {
+  const [casesData, setCasesData] = useState([]);
+  
+  useEffect(() => {
+    fetch('/api/projetos')
+      .then(r => r.json())
+      .then(data => {
+        if (Array.isArray(data)) setCasesData(data);
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background font-body flex flex-col">
       <Navbar />
@@ -77,9 +47,11 @@ export default function Projetos() {
         {/* Cases grid */}
         <section className="max-w-7xl mx-auto px-6 lg:px-8 pb-24">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-10">
-            {CASES.map((c, i) => (
+            {casesData.map((c, i) => {
+              const Icon = Building2; // Default Icon
+              return (
               <motion.div
-                key={c.sector}
+                key={c.id || c.sector}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -136,7 +108,7 @@ export default function Projetos() {
                   </div>
                 </div>
               </motion.div>
-            ))}
+            )})}
           </div>
         </section>
 

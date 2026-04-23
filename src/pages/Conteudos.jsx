@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { mockApi as base44 } from "@/api/mockApi";
+// Import removed
 import Navbar from "@/components/landing/Navbar";
 import SharedFooter from "@/components/landing/SharedFooter";
 
@@ -29,10 +29,13 @@ export default function Conteudos() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    base44.entities.BlogPost.list("-published_at", 50).then((data) => {
-      setPosts(data);
-      setLoading(false);
-    });
+    fetch('/api/conteudos')
+      .then(r => r.json())
+      .then(data => {
+        if (Array.isArray(data)) setPosts(data);
+        setLoading(false);
+      })
+      .catch(console.error);
   }, []);
 
   const sectionFiltered = posts.filter((p) =>
