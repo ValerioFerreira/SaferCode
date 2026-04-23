@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { mockApi as base44 } from "@/api/mockApi";
+import { base44 } from "@/api/base44Client";
+import Navbar from "@/components/landing/Navbar";
 import SharedFooter from "@/components/landing/SharedFooter";
 
-const LOGO_WIDE = "https://media.base44.com/images/public/69dd69e08275bba8ff88aaa6/5556524c0_logo_safercode_wide.png";
+const SECTION_TABS = ["Notícias", "Conhecimento"];
 
-const CATEGORIES = ["Todos", "Engenharia de Software", "Inteligência de Dados", "IA & Automação", "Cases de Sucesso"];
+// Map section tab to categories
+const SECTION_CATS = {
+  "Notícias": ["Cases de Sucesso", "IA & Automação"],
+  "Conhecimento": ["Engenharia de Software", "Inteligência de Dados"],
+};
+
+const ALL_FILTER_CATS = ["Todos", "Engenharia de Software", "Inteligência de Dados", "IA & Automação", "Cases de Sucesso"];
 
 const COVER_MAP = {
   "Engenharia de Software": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=70",
@@ -17,6 +24,7 @@ const COVER_MAP = {
 
 export default function Conteudos() {
   const [posts, setPosts] = useState([]);
+  const [activeSection, setActiveSection] = useState("Notícias");
   const [activeCategory, setActiveCategory] = useState("Todos");
   const [loading, setLoading] = useState(true);
 
@@ -27,32 +35,26 @@ export default function Conteudos() {
     });
   }, []);
 
+  const sectionFiltered = posts.filter((p) =>
+    SECTION_CATS[activeSection].includes(p.category)
+  );
+
   const filtered = activeCategory === "Todos"
-    ? posts
-    : posts.filter((p) => p.category === activeCategory);
+    ? sectionFiltered
+    : sectionFiltered.filter((p) => p.category === activeCategory);
+
+  const sectionCats = ["Todos", ...SECTION_CATS[activeSection]];
 
   return (
     <div className="min-h-screen bg-background font-body flex flex-col">
-      {/* Nav */}
-      <nav className="border-b border-border bg-background/90 backdrop-blur-xl sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-16">
-          <a href="/"><img src={LOGO_WIDE} alt="SaferCode" className="h-14" /></a>
-          <div className="flex items-center gap-6">
-            <a href="/#expertise" className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors hidden md:block">Expertise</a>
-            <a href="/conteudos" className="text-sm font-body text-primary font-semibold">Conteúdos</a>
-            <a href="/agendar" className="bg-primary text-primary-foreground font-body font-semibold text-sm px-5 py-2.5 rounded-md hover:opacity-90 transition-opacity">
-              Agendar Diagnóstico
-            </a>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
-      <main className="flex-1">
+      <main className="flex-1 pt-24 lg:pt-28">
         {/* Hero */}
-        <section className="py-20 lg:py-28 px-6 lg:px-8 text-center max-w-4xl mx-auto">
+        <section className="py-16 lg:py-24 px-6 lg:px-8 text-center max-w-4xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="text-xs font-body font-semibold text-primary uppercase tracking-widest mb-4 block">
-              Blog de Engenharia
+              Portal de Autoridade Técnica
             </span>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-foreground mb-6">
               Insights & Engenharia
@@ -63,22 +65,52 @@ export default function Conteudos() {
           </motion.div>
         </section>
 
-        {/* Filter tabs */}
-        <div className="px-6 lg:px-8 mb-12">
+        {/* Section tabs: Notícias / Conhecimento */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-6">
+          <div className="flex gap-1 bg-secondary/30 rounded-xl p-1 w-fit mx-auto">
+            {SECTION_TABS.map((tab) => (
+              <button
+                key={tab}
+                onClick={() => { setActiveSection(tab); setActiveCategory("Todos"); }}
+                className={`px-8 py-2.5 rounded-lg font-body text-sm font-semibold transition-all duration-200 ${
+                  activeSection === tab
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Category filter */}
+        <div className="px-6 lg:px-8 mb-10">
           <div className="max-w-7xl mx-auto flex flex-wrap gap-3 justify-center">
-            {CATEGORIES.map((cat) => (
+            {sectionCats.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={`px-5 py-2 rounded-full font-body text-sm font-medium transition-all duration-200 border ${
                   activeCategory === cat
-                    ? "bg-primary text-primary-foreground border-primary"
-                    : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                    ? "bg-primary/10 text-primary border-primary/40"
+                    : "border-border text-muted-foreground hover:border-primary/30 hover:text-foreground"
                 }`}
               >
                 {cat}
               </button>
             ))}
+          </div>
+        </div>
+
+        {/* Section label */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-6">
+          <div className="flex items-center gap-3">
+            <div className="h-px flex-1 bg-border" />
+            <span className="text-xs font-body font-semibold text-primary uppercase tracking-widest">
+              {activeSection}
+            </span>
+            <div className="h-px flex-1 bg-border" />
           </div>
         </div>
 
@@ -98,7 +130,7 @@ export default function Conteudos() {
               ))}
             </div>
           ) : filtered.length === 0 ? (
-            <p className="text-center text-muted-foreground font-body py-20">Nenhum post encontrado.</p>
+            <p className="text-center text-muted-foreground font-body py-20">Nenhum post encontrado nesta categoria.</p>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filtered.map((post, i) => (

@@ -1,9 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Shield, Microscope, Eye } from "lucide-react";
+import Navbar from "@/components/landing/Navbar";
 import SharedFooter from "@/components/landing/SharedFooter";
 
-const LOGO_WIDE = "https://media.base44.com/images/public/69dd69e08275bba8ff88aaa6/5556524c0_logo_safercode_wide.png";
 const LOGO_SHORT = "https://media.base44.com/images/public/69dd69e08275bba8ff88aaa6/61004af3b_logo_safercode_short.png";
 
 const PILLARS = [
@@ -11,46 +11,30 @@ const PILLARS = [
     icon: Shield,
     title: "Experiência Consolidada",
     description:
-      "Uma década de atuação em setores críticos, desde a segurança pública até a automação logística de larga escala. Cada projeto carrega o peso de uma metodologia testada e comprovada.",
+      "Uma década de atuação em setores críticos, desde a segurança pública até a automação logística de larga escala. Engenheiros e cientistas de dados com mais de 10 anos de experiência de mercado em Recife, com projetos comprovados em múltiplos verticais.",
   },
   {
     icon: Microscope,
     title: "Ciência e Engenharia",
     description:
-      "Não apenas escrevemos código; aplicamos métodos científicos para extrair valor de dados e engenharia de ponta para garantir escalabilidade. Problema primeiro, tecnologia depois.",
+      "Aplicamos métodos científicos rigorosos para transformar dados em inteligência operacional. Não apenas escrevemos código — arquitetamos sistemas que extraem valor real de dados complexos, com escalabilidade e previsibilidade.",
   },
   {
     icon: Eye,
     title: "Cultura de Transparência",
     description:
-      "Nossa sede em Recife opera como um centro de excelência técnica, onde a transparência no desenvolvimento é o alicerce da confiança dos nossos clientes.",
+      "Nossa sede em Recife opera como um centro de excelência técnica. A transparência no desenvolvimento é o alicerce da confiança dos nossos clientes — cada linha de código é auditável e documentada.",
   },
 ];
 
 export default function Sobre() {
   return (
     <div className="min-h-screen bg-background font-body flex flex-col">
-      {/* Nav */}
-      <nav className="border-b border-border bg-background/90 backdrop-blur-xl sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-16 lg:h-20">
-          <a href="/">
-            <img src={LOGO_WIDE} alt="SaferCode" className="h-14 lg:h-16" />
-          </a>
-          <div className="flex items-center gap-6">
-            <a href="/" className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors hidden md:block">Home</a>
-            <a href="/cases" className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors hidden md:block">Cases</a>
-            <a href="/conteudos" className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors hidden md:block">Conteúdos</a>
-            <a href="/agendar" className="bg-primary text-primary-foreground font-body font-semibold text-sm px-5 py-2.5 rounded-md hover:opacity-90 transition-opacity">
-              Agendar Diagnóstico
-            </a>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
-      <main className="flex-1">
+      <main className="flex-1 pt-24 lg:pt-28">
         {/* Hero */}
-        <section className="relative py-28 lg:py-40 overflow-hidden">
-          {/* Subtle grid */}
+        <section className="relative py-20 lg:py-32 overflow-hidden">
           <div className="absolute inset-0 opacity-5" style={{
             backgroundImage: "linear-gradient(hsl(210 70% 55% / 0.3) 1px, transparent 1px), linear-gradient(90deg, hsl(210 70% 55% / 0.3) 1px, transparent 1px)",
             backgroundSize: "60px 60px",
@@ -73,9 +57,9 @@ export default function Sobre() {
                   e Visão Estratégica.
                 </h1>
                 <p className="font-body text-lg text-muted-foreground leading-relaxed mb-10 max-w-xl">
-                  A SaferCode é formada por um núcleo sênior de engenheiros de software e cientistas de dados com um legado de mais de 10 anos de experiência na resolução de desafios complexos. Nossa equipe combina a precisão da ciência de dados com a robustez da engenharia de sistemas para criar ativos digitais que são, acima de tudo, seguros e auditáveis.
+                  A SaferCode é formada por um núcleo sênior de engenheiros de software e cientistas de dados com mais de 10 anos de experiência de mercado em Recife, focados em transformar dados em inteligência operacional. Nossa equipe combina a precisão da ciência de dados com a robustez da engenharia de sistemas para criar ativos digitais que são, acima de tudo, seguros e auditáveis.
                 </p>
-                <div className="flex flex-wrap gap-6">
+                <div className="flex flex-wrap gap-10">
                   {[
                     { value: "10+", label: "Anos de experiência" },
                     { value: "50+", label: "Projetos entregues" },
@@ -89,7 +73,6 @@ export default function Sobre() {
                 </div>
               </motion.div>
 
-              {/* Logo mark large */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}

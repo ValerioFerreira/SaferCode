@@ -3,13 +3,23 @@ import { MapPin, Mail, Instagram, Twitter, Linkedin } from "lucide-react";
 
 const LOGO_WIDE = "https://media.base44.com/images/public/69dd69e08275bba8ff88aaa6/5556524c0_logo_safercode_wide.png";
 
+const NAV_LINKS = [
+  { label: "Home", href: "/" },
+  { label: "Expertise", href: "/#expertise" },
+  { label: "Método", href: "/#metodo" },
+  { label: "Sobre Nós", href: "/sobre" },
+  { label: "Projetos", href: "/projetos" },
+  { label: "Conteúdos", href: "/conteudos" },
+  { label: "Agendar Diagnóstico", href: "/agendar" },
+];
+
 export default function SharedFooter() {
   return (
     <footer className="border-t border-border bg-card/50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-10">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
-            <img src={LOGO_WIDE} alt="SaferCode" className="h-16 mb-4" />
+            <img src={LOGO_WIDE} alt="SaferCode" className="h-14 mb-4" />
             <p className="font-body text-sm text-muted-foreground max-w-xs">
               Engenharia de Software e Consultoria Técnica. Segurança, transparência e código auditável.
             </p>
@@ -30,14 +40,7 @@ export default function SharedFooter() {
           <div>
             <h4 className="font-body font-semibold text-sm text-foreground mb-4">Navegação</h4>
             <div className="space-y-2">
-              {[
-                { label: "Expertise", href: "/#expertise" },
-                { label: "Método", href: "/#metodo" },
-                { label: "Sobre Nós", href: "/sobre" },
-                { label: "Cases", href: "/cases" },
-                { label: "Conteúdos", href: "/conteudos" },
-                { label: "Agendar Diagnóstico", href: "/agendar" },
-              ].map((link) => (
+              {NAV_LINKS.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
@@ -50,6 +53,7 @@ export default function SharedFooter() {
           </div>
         </div>
 
+        {/* Social links */}
         <div className="mt-8 flex items-center gap-4">
           <a href="https://instagram.com/safercode" target="_blank" rel="noopener noreferrer"
             className="w-9 h-9 rounded-md border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors">

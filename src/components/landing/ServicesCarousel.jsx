@@ -192,9 +192,9 @@ export default function ServicesCarousel() {
           </div>
         </motion.div>
 
-        {/* Spotlight track */}
+        {/* Spotlight track — hidden on mobile, shown on md+ */}
         <div
-          className="relative flex items-center justify-center gap-6 select-none cursor-grab active:cursor-grabbing"
+          className="relative hidden md:flex items-center justify-center gap-6 select-none cursor-grab active:cursor-grabbing"
           style={{ perspective: "1200px" }}
           onMouseDown={handleDragStart}
           onMouseUp={handleDragEnd}
@@ -217,6 +217,38 @@ export default function ServicesCarousel() {
           ) : (
             <div className="flex-1" style={{ minWidth: 0 }} />
           )}
+        </div>
+
+        {/* Mobile: single card */}
+        <div
+          className="md:hidden"
+          onTouchStart={handleDragStart}
+          onTouchEnd={handleDragEnd}
+        >
+          <div className="flex flex-col bg-card border border-primary/40 rounded-xl p-7 shadow-lg shadow-primary/10">
+            <div className="h-0.5 bg-primary mb-6 w-full" />
+            <h3 className="font-heading text-xl text-foreground mb-3">
+              {SERVICES[center].title}
+            </h3>
+            <p className="font-body text-sm text-muted-foreground leading-relaxed mb-6 flex-1">
+              {SERVICES[center].description}
+            </p>
+            <ul className="space-y-2 mb-8">
+              {SERVICES[center].includes.map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                  <span className="font-body text-xs text-muted-foreground">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              href="/agendar"
+              className="inline-flex items-center gap-2 text-sm font-body font-semibold text-primary"
+            >
+              Agende uma reunião
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
         </div>
 
         {/* Dots */}

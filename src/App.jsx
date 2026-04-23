@@ -11,6 +11,7 @@ import Conteudos from './pages/Conteudos';
 import PostSingle from './pages/PostSingle';
 import Sobre from './pages/Sobre';
 import Cases from './pages/Cases';
+import Projetos from './pages/Projetos';
 // Add page imports here
 
 const AuthenticatedApp = () => {
@@ -45,6 +46,7 @@ const AuthenticatedApp = () => {
       <Route path="/conteudos/:id" element={<PostSingle />} />
       <Route path="/sobre" element={<Sobre />} />
       <Route path="/cases" element={<Cases />} />
+      <Route path="/projetos" element={<Projetos />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
