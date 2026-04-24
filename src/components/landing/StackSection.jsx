@@ -5,7 +5,7 @@ const BRIDGE_IMAGE = "https://media.base44.com/images/public/69dd69e08275bba8ff8
 
 // SVG icons as inline components for each technology
 // Filtro que transforma PRETO em #FACC14
-const YELLOW_FILTER = "invert(86%) sepia(74%) saturate(1214%) hue-rotate(331deg) brightness(101%) contrast(98%)";
+const YELLOW_FILTER = "brightness(0) saturate(100%) invert(83%) sepia(55%) saturate(800%) hue-rotate(5deg) brightness(103%) contrast(97%)";
 
 const ICONS = {
   "React": () => (
