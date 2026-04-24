@@ -22,3 +22,32 @@ CREATE TABLE IF NOT EXISTS conteudos (
   cover_url VARCHAR(2048) NOT NULL,
   published_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
+
+-- ===============================
+-- Tabelas de Interação Social
+-- ===============================
+
+CREATE TABLE IF NOT EXISTS likes_publicacoes (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  post_id UUID NOT NULL REFERENCES conteudos(id) ON DELETE CASCADE,
+  ip_fingerprint TEXT NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE(post_id, ip_fingerprint)
+);
+
+CREATE TABLE IF NOT EXISTS comentarios (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  post_id UUID NOT NULL REFERENCES conteudos(id) ON DELETE CASCADE,
+  parent_id UUID REFERENCES comentarios(id) ON DELETE CASCADE,
+  autor_nome VARCHAR(255) NOT NULL,
+  texto TEXT NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS likes_comentarios (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  comentario_id UUID NOT NULL REFERENCES comentarios(id) ON DELETE CASCADE,
+  ip_fingerprint TEXT NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE(comentario_id, ip_fingerprint)
+);
