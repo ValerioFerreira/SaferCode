@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { mockApi as base44 } from "@/api/mockApi";
+// Import removed
 
 const COVER_MAP = {
   "Engenharia de Software": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=70",
@@ -15,7 +15,14 @@ export default function LatestPosts() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    base44.entities.BlogPost.list("-published_at", 3).then(setPosts);
+    fetch('/api/conteudos')
+      .then(r => r.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setPosts(data.slice(0, 3));
+        }
+      })
+      .catch(console.error);
   }, []);
 
   if (posts.length === 0) return null;

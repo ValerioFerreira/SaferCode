@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, Phone, User, FileText } from "lucide-react";
-import { mockApi as base44 } from "@/api/mockApi";
+// Import removed
 import SharedFooter from "@/components/landing/SharedFooter";
 
 const LOGO_WIDE = "https://media.base44.com/images/public/69dd69e08275bba8ff88aaa6/5556524c0_logo_safercode_wide.png";
@@ -29,13 +29,9 @@ export default function Agendar() {
     setLoading(true);
     setError("");
 
-    await base44.entities.DiagnosticoLead.create(form);
-
-    await base44.integrations.Core.SendEmail({
-      to: "contato@safercode.com.br",
-      subject: `Novo Diagnóstico: ${form.nome}`,
-      body: `Nome: ${form.nome}\nTelefone: ${form.telefone}\n\nDescrição:\n${form.descricao}`,
-    });
+    // Mocking the submission since mockApi is gone
+    console.log("Form submission:", form);
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     setLoading(false);
     setSent(true);
