@@ -4,267 +4,144 @@ import { motion } from "framer-motion";
 const BRIDGE_IMAGE = "https://media.base44.com/images/public/69dd69e08275bba8ff88aaa6/7f6e97462_generated_07b7a460.png";
 
 // SVG icons as inline components for each technology
+// Filtro que transforma PRETO em #FACC14
+const YELLOW_FILTER = "invert(86%) sepia(74%) saturate(1214%) hue-rotate(331deg) brightness(101%) contrast(98%)";
+
 const ICONS = {
-  // Frontend
   "React": () => (
-    <div
-      className="w-5 h-5"
-      style={{
-        backgroundColor: '#FACC14',
-        maskImage: 'url(/images/React.svg)',
-        WebkitMaskImage: 'url(/images/React.svg)',
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskSize: 'contain',
-        WebkitMaskSize: 'contain',
-        display: 'inline-block'
-      }}
+    <img
+      src="/images/React.svg"
+      alt="React"
+      className="w-10 h-10 object-contain"
+      style={{ filter: YELLOW_FILTER }}
     />
   ),
   "Next.js": () => (
-    <div
-      className="w-5 h-5"
-      style={{
-        backgroundColor: '#FACC14',
-        maskImage: 'url(/images/Next.svg)',
-        WebkitMaskImage: 'url(/images/Next.svg)',
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskSize: 'contain',
-        WebkitMaskSize: 'contain',
-        display: 'inline-block'
-      }}
+    <img
+      src="/images/Next.svg"
+      alt="Next.js"
+      className="w-10 h-10 object-contain"
+      style={{ filter: YELLOW_FILTER }}
     />
   ),
   "TypeScript": () => (
-    <div
-      className="w-5 h-5"
-      style={{
-        backgroundColor: '#FACC14',
-        maskImage: 'url(/images/TypeScript.svg)',
-        WebkitMaskImage: 'url(/images/TypeScript.svg)',
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskSize: 'contain',
-        WebkitMaskSize: 'contain',
-        display: 'inline-block'
-      }}
+    <img
+      src="/images/TypeScript.svg"
+      alt="TypeScript"
+      className="w-10 h-10 object-contain"
+      style={{ filter: YELLOW_FILTER }}
     />
   ),
   "Tailwind": () => (
-    <div
-      className="w-5 h-5"
-      style={{
-        backgroundColor: '#FACC14',
-        maskImage: 'url(/images/Tailwind.svg)',
-        WebkitMaskImage: 'url(/images/Tailwind.svg)',
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskSize: 'contain',
-        WebkitMaskSize: 'contain',
-        display: 'inline-block'
-      }}
+    <img
+      src="/images/Tailwind.svg"
+      alt="Tailwind"
+      className="w-10 h-10 object-contain"
+      style={{ filter: YELLOW_FILTER }}
     />
   ),
-
-  // Backend
   "Rails": () => (
-    <div
-      className="w-5 h-5"
-      style={{
-        backgroundColor: '#FACC14',
-        maskImage: 'url(/images/Rails.svg)',
-        WebkitMaskImage: 'url(/images/Rails.svg)',
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskSize: 'contain',
-        WebkitMaskSize: 'contain',
-        display: 'inline-block'
-      }}
+    <img
+      src="/images/Rails.svg"
+      alt="Rails"
+      className="w-10 h-10 object-contain"
+      style={{ filter: YELLOW_FILTER }}
     />
   ),
   "Node.js": () => (
-    <div
-      className="w-5 h-5"
-      style={{
-        backgroundColor: '#FACC14',
-        maskImage: 'url(/images/Node.svg)',
-        WebkitMaskImage: 'url(/images/Node.svg)',
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskSize: 'contain',
-        WebkitMaskSize: 'contain',
-        display: 'inline-block'
-      }}
+    <img
+      src="/images/Node.svg"
+      alt="Node.js"
+      className="w-10 h-10 object-contain"
+      style={{ filter: YELLOW_FILTER }}
     />
   ),
   "Nest.js": () => (
-    <div
-      className="w-5 h-5"
-      style={{
-        backgroundColor: '#FACC14',
-        maskImage: 'url(/images/Nest.svg)',
-        WebkitMaskImage: 'url(/images/Nest.svg)',
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskSize: 'contain',
-        WebkitMaskSize: 'contain',
-        display: 'inline-block'
-      }}
+    <img
+      src="/images/Nest.svg"
+      alt="Nest.js"
+      className="w-10 h-10 object-contain"
+      style={{ filter: YELLOW_FILTER }}
     />
   ),
   "Python": () => (
-    <div
-      className="w-5 h-5"
-      style={{
-        backgroundColor: '#FACC14',
-        maskImage: 'url(/images/Python.svg)',
-        WebkitMaskImage: 'url(/images/Python.svg)',
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskSize: 'contain',
-        WebkitMaskSize: 'contain',
-        display: 'inline-block'
-      }}
+    <img
+      src="/images/Python.svg"
+      alt="Python"
+      className="w-10 h-10 object-contain"
+      style={{ filter: YELLOW_FILTER }}
     />
   ),
   "Java": () => (
-    <div
-      className="w-5 h-5"
-      style={{
-        backgroundColor: '#FACC14',
-        maskImage: 'url(/images/Java.svg)',
-        WebkitMaskImage: 'url(/images/Java.svg)',
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskSize: 'contain',
-        WebkitMaskSize: 'contain',
-        display: 'inline-block'
-      }}
+    <img
+      src="/images/Java.svg"
+      alt="Java"
+      className="w-10 h-10 object-contain"
+      style={{ filter: YELLOW_FILTER }}
     />
   ),
-
-  // Infra
   "Docker": () => (
-    <div
-      className="w-5 h-5"
-      style={{
-        backgroundColor: '#FACC14',
-        maskImage: 'url(/images/Docker.svg)',
-        WebkitMaskImage: 'url(/images/Docker.svg)',
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskSize: 'contain',
-        WebkitMaskSize: 'contain',
-        display: 'inline-block'
-      }}
+    <img
+      src="/images/Docker.svg"
+      alt="Docker"
+      className="w-10 h-10 object-contain"
+      style={{ filter: YELLOW_FILTER }}
     />
   ),
   "CI/CD": () => (
-    <div
-      className="w-5 h-5"
-      style={{
-        backgroundColor: '#FACC14',
-        maskImage: 'url(/images/CICD.svg)',
-        WebkitMaskImage: 'url(/images/CICD.svg)',
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskSize: 'contain',
-        WebkitMaskSize: 'contain',
-        display: 'inline-block'
-      }}
+    <img
+      src="/images/CICD.svg"
+      alt="CI/CD"
+      className="w-10 h-10 object-contain"
+      style={{ filter: YELLOW_FILTER }}
     />
   ),
   "AWS": () => (
-    <div
-      className="w-5 h-5"
-      style={{
-        backgroundColor: '#FACC14',
-        maskImage: 'url(/images/AWS.svg)',
-        WebkitMaskImage: 'url(/images/AWS.svg)',
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskSize: 'contain',
-        WebkitMaskSize: 'contain',
-        display: 'inline-block'
-      }}
+    <img
+      src="/images/AWS.svg"
+      alt="AWS"
+      className="w-10 h-10 object-contain"
+      style={{ filter: YELLOW_FILTER }}
     />
   ),
   "Kubernetes": () => (
-    <div
-      className="w-5 h-5"
-      style={{
-        backgroundColor: '#FACC14',
-        maskImage: 'url(/images/Kubernetes.svg)',
-        WebkitMaskImage: 'url(/images/Kubernetes.svg)',
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskSize: 'contain',
-        WebkitMaskSize: 'contain',
-        display: 'inline-block'
-      }}
+    <img
+      src="/images/Kubernetes.svg"
+      alt="Kubernetes"
+      className="w-10 h-10 object-contain"
+      style={{ filter: YELLOW_FILTER }}
     />
   ),
-
-  // Data
   "PostgreSQL": () => (
-    <div
-      className="w-5 h-5"
-      style={{
-        backgroundColor: '#FACC14',
-        maskImage: 'url(/images/PostgresSQL.svg)',
-        WebkitMaskImage: 'url(/images/PostgresSQL.svg)',
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskSize: 'contain',
-        WebkitMaskSize: 'contain',
-        display: 'inline-block'
-      }}
+    <img
+      src="/images/PostgresSQL.svg"
+      alt="PostgreSQL"
+      className="w-10 h-10 object-contain"
+      style={{ filter: YELLOW_FILTER }}
     />
   ),
   "MongoDB": () => (
-    <div
-      className="w-5 h-5"
-      style={{
-        backgroundColor: '#FACC14',
-        maskImage: 'url(/images/MongoDB.svg)',
-        WebkitMaskImage: 'url(/images/MongoDB.svg)',
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskSize: 'contain',
-        WebkitMaskSize: 'contain',
-        display: 'inline-block'
-      }}
+    <img
+      src="/images/MongoDB.svg"
+      alt="MongoDB"
+      className="w-10 h-10 object-contain"
+      style={{ filter: YELLOW_FILTER }}
     />
   ),
   "Machine Learning": () => (
-    <div
-      className="w-5 h-5"
-      style={{
-        backgroundColor: '#FACC14',
-        maskImage: 'url(/images/MachineLearning.svg)',
-        WebkitMaskImage: 'url(/images/MachineLearning.svg)',
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskSize: 'contain',
-        WebkitMaskSize: 'contain',
-        display: 'inline-block'
-      }}
+    <img
+      src="/images/MachineLearning.svg"
+      alt="Machine Learning"
+      className="w-10 h-10 object-contain"
+      style={{ filter: YELLOW_FILTER }}
     />
   ),
   "BI": () => (
-    <div
-      className="w-5 h-5"
-      style={{
-        backgroundColor: '#FACC14',
-        maskImage: 'url(/images/BI.svg)',
-        WebkitMaskImage: 'url(/images/BI.svg)',
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskSize: 'contain',
-        WebkitMaskSize: 'contain',
-        display: 'inline-block'
-      }}
+    <img
+      src="/images/BI.svg"
+      alt="BI"
+      className="w-10 h-10 object-contain"
+      style={{ filter: YELLOW_FILTER }}
     />
   ),
 };
