@@ -7,106 +7,265 @@ const BRIDGE_IMAGE = "https://media.base44.com/images/public/69dd69e08275bba8ff8
 const ICONS = {
   // Frontend
   "React": () => (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-      <circle cx="12" cy="12" r="2.5" />
-      <ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="currentColor" strokeWidth="1.2" />
-      <ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="currentColor" strokeWidth="1.2" transform="rotate(60 12 12)" />
-      <ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="currentColor" strokeWidth="1.2" transform="rotate(120 12 12)" />
-    </svg>
-  ),
-  "Next.js": () => (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-1 14.5v-9l7 9H11z" />
-    </svg>
-  ),
-  "TypeScript": () => (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-      <rect x="2" y="2" width="20" height="20" rx="2" />
-      <path fill="hsl(220 30% 7%)" d="M14 10h-2.5v7H10v-7H7.5V8.5H14V10zm2.5 7c-.4 0-.8-.1-1.1-.3l.4-1.1c.2.1.4.2.7.2.5 0 .8-.3.8-.9V10H19v5c0 1.3-.7 2-2 2l-.5-.0z" />
-    </svg>
-  ),
-  "Tailwind": () => (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-      <path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.3.74 1.9 1.35.98 1 2.09 2.15 4.6 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.3-.74-1.9-1.35C15.62 7.15 14.51 6 12 6zm-5 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.3.74 1.9 1.35C8.38 16.85 9.49 18 12 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.3-.74-1.9-1.35C10.62 13.15 9.51 12 7 12z" />
-    </svg>
-  ),
-  // Backend
-  "Rails": () => (
     <div
-      className="w-5 h-5 bg-currentColor"
+      className="w-5 h-5"
       style={{
-        maskImage: 'url(https://img.icons8.com/windows/32/ruby-on-rails.png)',
-        WebkitMaskImage: 'url(https://img.icons8.com/windows/32/ruby-on-rails.png)',
+        backgroundColor: '#FACC14',
+        maskImage: 'url(/images/React.svg)',
+        WebkitMaskImage: 'url(/images/React.svg)',
         maskRepeat: 'no-repeat',
         WebkitMaskRepeat: 'no-repeat',
         maskSize: 'contain',
-        WebkitMaskSize: 'contain'
+        WebkitMaskSize: 'contain',
+        display: 'inline-block'
+      }}
+    />
+  ),
+  "Next.js": () => (
+    <div
+      className="w-5 h-5"
+      style={{
+        backgroundColor: '#FACC14',
+        maskImage: 'url(/images/Next.svg)',
+        WebkitMaskImage: 'url(/images/Next.svg)',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        display: 'inline-block'
+      }}
+    />
+  ),
+  "TypeScript": () => (
+    <div
+      className="w-5 h-5"
+      style={{
+        backgroundColor: '#FACC14',
+        maskImage: 'url(/images/TypeScript.svg)',
+        WebkitMaskImage: 'url(/images/TypeScript.svg)',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        display: 'inline-block'
+      }}
+    />
+  ),
+  "Tailwind": () => (
+    <div
+      className="w-5 h-5"
+      style={{
+        backgroundColor: '#FACC14',
+        maskImage: 'url(/images/Tailwind.svg)',
+        WebkitMaskImage: 'url(/images/Tailwind.svg)',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        display: 'inline-block'
+      }}
+    />
+  ),
+
+  // Backend
+  "Rails": () => (
+    <div
+      className="w-5 h-5"
+      style={{
+        backgroundColor: '#FACC14',
+        maskImage: 'url(/images/Rails.svg)',
+        WebkitMaskImage: 'url(/images/Rails.svg)',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        display: 'inline-block'
       }}
     />
   ),
   "Node.js": () => (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-      <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18L20 8v8l-8 4-8-4V8l8-3.82z" />
-    </svg>
+    <div
+      className="w-5 h-5"
+      style={{
+        backgroundColor: '#FACC14',
+        maskImage: 'url(/images/Node.svg)',
+        WebkitMaskImage: 'url(/images/Node.svg)',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        display: 'inline-block'
+      }}
+    />
   ),
   "Nest.js": () => (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-      <path d="M14.13 2.67c-.28-.47-.96-.47-1.24 0L2.38 20.33c-.28.47.07 1.05.62 1.05h18.99c.55 0 .9-.58.62-1.05L14.13 2.67zm-1.06 1.76l8.53 14.74H4.4l8.67-14.74z" />
-    </svg>
+    <div
+      className="w-5 h-5"
+      style={{
+        backgroundColor: '#FACC14',
+        maskImage: 'url(/images/Nest.svg)',
+        WebkitMaskImage: 'url(/images/Nest.svg)',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        display: 'inline-block'
+      }}
+    />
   ),
   "Python": () => (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-      <path d="M12 2C9.5 2 8 3.2 8 5v2h4v1H5.5C3.6 8 2 9.6 2 11.5v3C2 16.4 3.6 18 5.5 18H7v-2.5C7 13.6 8.6 12 10.5 12H14c1.4 0 2.5-1.1 2.5-2.5V5C16.5 3.1 14.8 2 12 2zm-1 2c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm2 16c2.5 0 4-1.2 4-3v-2h-4v-1h6.5c1.9 0 3.5-1.6 3.5-3.5v-3C22 7.6 20.4 6 18.5 6H17v2.5C17 10.4 15.4 12 13.5 12H10c-1.4 0-2.5 1.1-2.5 2.5V19c0 1.9 1.7 3 4.5 3zm1-2c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z" />
-    </svg>
+    <div
+      className="w-5 h-5"
+      style={{
+        backgroundColor: '#FACC14',
+        maskImage: 'url(/images/Python.svg)',
+        WebkitMaskImage: 'url(/images/Python.svg)',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        display: 'inline-block'
+      }}
+    />
   ),
   "Java": () => (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-      <path d="M8.85 16.83c-.02 0-1.18.34-1.18.34s.44.74 2.38.74c1.35 0 3.15-.55 3.15-2.33 0-1.6-1.75-2.1-1.75-3.07 0 0 .95.48.95 1.6 0 1.04-1.1 1.43-1.1 1.43s.65-.4.65-1.2c0-.9-1.1-1.35-1.1-2.47s.85-1.8.85-1.8-1.5.5-1.5 2.08c0 1.3 1.1 1.7 1.1 2.6s-.7 1.2-1.45 1.2c-.52 0-1-.12-1-.12zm8.2-5.6s.53 1.35.53 2.43c0 2.2-2.25 3.4-4.75 3.4-2 0-2.9-.8-2.9-.8s2.48-.75 3.55-2.73c.7-1.3.57-2.3.57-2.3z" />
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
-    </svg>
+    <div
+      className="w-5 h-5"
+      style={{
+        backgroundColor: '#FACC14',
+        maskImage: 'url(/images/Java.svg)',
+        WebkitMaskImage: 'url(/images/Java.svg)',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        display: 'inline-block'
+      }}
+    />
   ),
+
   // Infra
   "Docker": () => (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-      <path d="M13 3h-2v2h2V3zm-4 0H7v2h2V3zm-4 0H3v2h2V3zm8 4h-2v2h2V7zm-4 0H7v2h2V7zm-4 0H3v2h2V7zm8 4h-2v2h2v-2zm-4 0H7v2h2v-2zM3 11h2v2H3v-2zm17.5 1c-.3-.9-1.2-1-1.2-1H17c0-2.8-2.2-5-5-5v2c1.65 0 3 1.35 3 3H9v2h11.5s.3-.1 0-1z" />
-    </svg>
+    <div
+      className="w-5 h-5"
+      style={{
+        backgroundColor: '#FACC14',
+        maskImage: 'url(/images/Docker.svg)',
+        WebkitMaskImage: 'url(/images/Docker.svg)',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        display: 'inline-block'
+      }}
+    />
   ),
   "CI/CD": () => (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
-    </svg>
+    <div
+      className="w-5 h-5"
+      style={{
+        backgroundColor: '#FACC14',
+        maskImage: 'url(/images/CICD.svg)',
+        WebkitMaskImage: 'url(/images/CICD.svg)',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        display: 'inline-block'
+      }}
+    />
   ),
   "AWS": () => (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-      <path d="M6.76 16.46L4 15.5l1-3 2 .8L6.76 16.46zM8 8l-.5 3 2.5.8L11 8H8zm5 0l1 3.8 2.5-.8L16 8h-3zm2.24 8.46L17 13.3l-2 .8 1 3 2.24-.64zM12 17l-2-4h4l-2 4z" />
-      <path d="M12 3C7 3 3 7 3 12s4 9 9 9 9-4 9-9-4-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z" />
-    </svg>
+    <div
+      className="w-5 h-5"
+      style={{
+        backgroundColor: '#FACC14',
+        maskImage: 'url(/images/AWS.svg)',
+        WebkitMaskImage: 'url(/images/AWS.svg)',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        display: 'inline-block'
+      }}
+    />
   ),
   "Kubernetes": () => (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-      <path d="M12 2l-1.5 3.5-3.7.5 2.7 2.6-.6 3.7L12 10.5l3.1 1.8-.6-3.7 2.7-2.6-3.7-.5L12 2zm0 9.5L9 19h6l-3-7.5zm-7 4l-1 2.5H6l-1-2.5zm14 0l-1 2.5H20l-1-2.5z" />
-    </svg>
+    <div
+      className="w-5 h-5"
+      style={{
+        backgroundColor: '#FACC14',
+        maskImage: 'url(/images/Kubernetes.svg)',
+        WebkitMaskImage: 'url(/images/Kubernetes.svg)',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        display: 'inline-block'
+      }}
+    />
   ),
+
   // Data
   "PostgreSQL": () => (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-      <path d="M12 3C8.13 3 5 5.25 5 8v8c0 2.75 3.13 5 7 5s7-2.25 7-5V8c0-2.75-3.13-5-7-5zm0 2c3.31 0 5 1.57 5 3s-1.69 3-5 3-5-1.57-5-3 1.69-3 5-3zm5 11c0 1.43-1.69 3-5 3s-5-1.57-5-3v-1.35C8.31 14.53 10.09 15 12 15s3.69-.47 5-1.35V16zm0-4c0 1.43-1.69 3-5 3s-5-1.57-5-3v-1.35C8.31 10.53 10.09 11 12 11s3.69-.47 5-1.35V12z" />
-    </svg>
+    <div
+      className="w-5 h-5"
+      style={{
+        backgroundColor: '#FACC14',
+        maskImage: 'url(/images/PostgresSQL.svg)',
+        WebkitMaskImage: 'url(/images/PostgresSQL.svg)',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        display: 'inline-block'
+      }}
+    />
   ),
   "MongoDB": () => (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-      <path d="M12 2C9 2 7 5 7 8c0 2 .7 3.5 1.8 4.7L12 22l3.2-9.3C16.3 11.5 17 10 17 8c0-3-2-6-5-6zm0 7.5c-.8 0-1.5-.7-1.5-1.5S11.2 6.5 12 6.5s1.5.7 1.5 1.5S12.8 9.5 12 9.5z" />
-    </svg>
+    <div
+      className="w-5 h-5"
+      style={{
+        backgroundColor: '#FACC14',
+        maskImage: 'url(/images/MongoDB.svg)',
+        WebkitMaskImage: 'url(/images/MongoDB.svg)',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        display: 'inline-block'
+      }}
+    />
   ),
   "Machine Learning": () => (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-      <path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 2a8 8 0 110 16A8 8 0 0112 4zm0 2a6 6 0 100 12A6 6 0 0012 6zm0 2a4 4 0 110 8 4 4 0 010-8zm0 2a2 2 0 100 4 2 2 0 000-4z" />
-    </svg>
+    <div
+      className="w-5 h-5"
+      style={{
+        backgroundColor: '#FACC14',
+        maskImage: 'url(/images/MachineLearning.svg)',
+        WebkitMaskImage: 'url(/images/MachineLearning.svg)',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        display: 'inline-block'
+      }}
+    />
   ),
   "BI": () => (
-    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-      <path d="M5 20h14v-2H5v2zm0-4h4v-6H5v6zm6 0h4V6h-4v10zm6 0h4v-4h-4v4z" />
-    </svg>
+    <div
+      className="w-5 h-5"
+      style={{
+        backgroundColor: '#FACC14',
+        maskImage: 'url(/images/BI.svg)',
+        WebkitMaskImage: 'url(/images/BI.svg)',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        display: 'inline-block'
+      }}
+    />
   ),
 };
 
