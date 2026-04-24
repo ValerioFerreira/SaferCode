@@ -5,14 +5,15 @@ const BRIDGE_IMAGE = "https://media.base44.com/images/public/69dd69e08275bba8ff8
 
 // SVG icons as inline components for each technology
 // Filtro que transforma PRETO em #FACC14
-const YELLOW_FILTER = "brightness(0) saturate(100%) invert(83%) sepia(55%) saturate(800%) hue-rotate(5deg) brightness(103%) contrast(97%)";
+const YELLOW_FILTER = "brightness(0) saturate(100%) invert(85%) sepia(9%) saturate(6879%) hue-rotate(349deg) brightness(108%) contrast(96%)";
+const ICON_CLASS = "w-8 h-8 object-contain";
 
 const ICONS = {
   "React": () => (
     <img
       src="/images/React.svg"
       alt="React"
-      className="w-10 h-10 object-contain"
+      className={ICON_CLASS}
       style={{ filter: YELLOW_FILTER }}
     />
   ),
@@ -20,7 +21,7 @@ const ICONS = {
     <img
       src="/images/Next.svg"
       alt="Next.js"
-      className="w-10 h-10 object-contain"
+      className={ICON_CLASS}
       style={{ filter: YELLOW_FILTER }}
     />
   ),
@@ -28,15 +29,15 @@ const ICONS = {
     <img
       src="/images/TypeScript.svg"
       alt="TypeScript"
-      className="w-10 h-10 object-contain"
-      style={{ filter: YELLOW_FILTER }}
+      className={ICON_CLASS}
+
     />
   ),
   "Tailwind": () => (
     <img
       src="/images/Tailwind.svg"
       alt="Tailwind"
-      className="w-10 h-10 object-contain"
+      className={ICON_CLASS}
       style={{ filter: YELLOW_FILTER }}
     />
   ),
@@ -44,7 +45,7 @@ const ICONS = {
     <img
       src="/images/Rails.svg"
       alt="Rails"
-      className="w-10 h-10 object-contain"
+      className={ICON_CLASS}
       style={{ filter: YELLOW_FILTER }}
     />
   ),
@@ -52,7 +53,7 @@ const ICONS = {
     <img
       src="/images/Node.svg"
       alt="Node.js"
-      className="w-10 h-10 object-contain"
+      className={ICON_CLASS}
       style={{ filter: YELLOW_FILTER }}
     />
   ),
@@ -60,7 +61,7 @@ const ICONS = {
     <img
       src="/images/Nest.svg"
       alt="Nest.js"
-      className="w-10 h-10 object-contain"
+      className={ICON_CLASS}
       style={{ filter: YELLOW_FILTER }}
     />
   ),
@@ -68,7 +69,7 @@ const ICONS = {
     <img
       src="/images/Python.svg"
       alt="Python"
-      className="w-10 h-10 object-contain"
+      className={ICON_CLASS}
       style={{ filter: YELLOW_FILTER }}
     />
   ),
@@ -76,7 +77,7 @@ const ICONS = {
     <img
       src="/images/Java.svg"
       alt="Java"
-      className="w-10 h-10 object-contain"
+      className={ICON_CLASS}
       style={{ filter: YELLOW_FILTER }}
     />
   ),
@@ -84,7 +85,7 @@ const ICONS = {
     <img
       src="/images/Docker.svg"
       alt="Docker"
-      className="w-10 h-10 object-contain"
+      className={ICON_CLASS}
       style={{ filter: YELLOW_FILTER }}
     />
   ),
@@ -92,7 +93,7 @@ const ICONS = {
     <img
       src="/images/CICD.svg"
       alt="CI/CD"
-      className="w-10 h-10 object-contain"
+      className={ICON_CLASS}
       style={{ filter: YELLOW_FILTER }}
     />
   ),
@@ -100,7 +101,7 @@ const ICONS = {
     <img
       src="/images/AWS.svg"
       alt="AWS"
-      className="w-10 h-10 object-contain"
+      className={ICON_CLASS}
       style={{ filter: YELLOW_FILTER }}
     />
   ),
@@ -108,23 +109,22 @@ const ICONS = {
     <img
       src="/images/Kubernetes.svg"
       alt="Kubernetes"
-      className="w-10 h-10 object-contain"
+      className={ICON_CLASS}
       style={{ filter: YELLOW_FILTER }}
     />
   ),
   "PostgreSQL": () => (
     <img
-      src="/images/PostgresSQL.svg"
+      src="/images/PostgresSQL.png"
       alt="PostgreSQL"
-      className="w-10 h-10 object-contain"
-      style={{ filter: YELLOW_FILTER }}
+      className={ICON_CLASS}
     />
   ),
   "MongoDB": () => (
     <img
       src="/images/MongoDB.svg"
       alt="MongoDB"
-      className="w-10 h-10 object-contain"
+      className={ICON_CLASS}
       style={{ filter: YELLOW_FILTER }}
     />
   ),
@@ -132,7 +132,7 @@ const ICONS = {
     <img
       src="/images/MachineLearning.svg"
       alt="Machine Learning"
-      className="w-10 h-10 object-contain"
+      className={ICON_CLASS}
       style={{ filter: YELLOW_FILTER }}
     />
   ),
@@ -140,7 +140,7 @@ const ICONS = {
     <img
       src="/images/BI.svg"
       alt="BI"
-      className="w-10 h-10 object-contain"
+      className={ICON_CLASS}
       style={{ filter: YELLOW_FILTER }}
     />
   ),
