@@ -118,10 +118,16 @@ export default function PostSingle() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    base44.entities.BlogPost.filter({ id }).then((data) => {
-      setPost(data[0] || null);
-      setLoading(false);
-    });
+    fetch(`/api/conteudos?id=${id}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        setPost(data || null);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
   }, [id]);
 
   if (loading) {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useCMSAuth } from '@/lib/CMSAuthContext';
+import { Pencil, Trash2 } from 'lucide-react';
 
 const BADGES = [
   "IA & Automação", "Big Data", "Inteligência de Dados", "Engenharia de Software", 
@@ -13,7 +14,7 @@ export default function CMSConteudos() {
   const { token } = useCMSAuth();
   const [conteudos, setConteudos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isAdding, setIsAdding] = useState(false);
+  const [editingId, setEditingId] = useState(null);
 
   const { register, handleSubmit, reset } = useForm();
 
@@ -33,21 +34,52 @@ export default function CMSConteudos() {
     fetchConteudos();
   }, []);
 
+  const openForm = (cont = null) => {
+    if (cont) {
+      setEditingId(cont.id);
+      reset(cont);
+    } else {
+      setEditingId('new');
+      reset({});
+    }
+  };
+
+  const closeForm = () => {
+    setEditingId(null);
+    reset({});
+  };
+
   const onSubmit = async (data) => {
+    const method = editingId === 'new' ? 'POST' : 'PUT';
+    if (method === 'PUT') data.id = editingId;
+
     try {
       const res = await fetch('/api/conteudos', {
-        method: 'POST',
+        method,
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(data)
       });
       if (res.ok) {
-        setIsAdding(false);
-        reset();
+        closeForm();
         fetchConteudos();
       } else {
-        alert("Erro ao adicionar");
+        alert("Erro ao salvar conteúdo");
       }
     } catch(err) {
+      alert("Erro na requisição");
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm("Tem certeza que deseja excluir esta postagem?")) return;
+    try {
+      const res = await fetch(`/api/conteudos?id=${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) fetchConteudos();
+      else alert("Erro ao excluir");
+    } catch(e) {
       alert("Erro na requisição");
     }
   };
@@ -56,12 +88,12 @@ export default function CMSConteudos() {
     <div className="max-w-5xl mx-auto">
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-3xl font-heading text-foreground">Conteúdos</h2>
-        <button onClick={() => setIsAdding(!isAdding)} className="bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-semibold">
-          {isAdding ? 'Cancelar' : '+ Novo Conteúdo'}
+        <button onClick={() => editingId ? closeForm() : openForm()} className="bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-semibold">
+          {editingId ? 'Cancelar' : '+ Novo Conteúdo'}
         </button>
       </div>
 
-      {isAdding && (
+      {editingId && (
         <form onSubmit={handleSubmit(onSubmit)} className="bg-card border border-border rounded-xl p-6 mb-8 space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
@@ -90,7 +122,9 @@ export default function CMSConteudos() {
             <label className="block text-sm text-muted-foreground mb-1">Conteúdo (Markdown ou Texto Livre)</label>
             <textarea {...register('content', { required: true })} rows={6} className="w-full bg-background border border-border rounded px-3 py-2 text-foreground resize-y font-mono"></textarea>
           </div>
-          <button type="submit" className="bg-primary text-primary-foreground font-semibold px-6 py-2 rounded-lg">Salvar Conteúdo</button>
+          <button type="submit" className="bg-primary text-primary-foreground font-semibold px-6 py-2 rounded-lg">
+            {editingId === 'new' ? 'Salvar Conteúdo' : 'Atualizar Conteúdo'}
+          </button>
         </form>
       )}
 
@@ -102,7 +136,7 @@ export default function CMSConteudos() {
                 <th className="px-6 py-3 font-medium">Título</th>
                 <th className="px-6 py-3 font-medium">Tipo</th>
                 <th className="px-6 py-3 font-medium">Categoria</th>
-                <th className="px-6 py-3 font-medium">Data</th>
+                <th className="px-6 py-3 font-medium text-right">Ações</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
@@ -111,7 +145,14 @@ export default function CMSConteudos() {
                   <td className="px-6 py-4 font-semibold">{c.title}</td>
                   <td className="px-6 py-4 text-muted-foreground">{c.type}</td>
                   <td className="px-6 py-4 text-primary font-medium">{c.category}</td>
-                  <td className="px-6 py-4 text-muted-foreground">{new Date(c.published_at).toLocaleDateString()}</td>
+                  <td className="px-6 py-4 flex items-center justify-end gap-3 text-muted-foreground">
+                    <button onClick={() => openForm(c)} className="hover:text-primary transition-colors p-1" title="Editar">
+                      <Pencil className="w-4 h-4" />
+                    </button>
+                    <button onClick={() => handleDelete(c.id)} className="hover:text-destructive transition-colors p-1" title="Excluir">
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

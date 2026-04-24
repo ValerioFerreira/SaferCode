@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useCMSAuth } from '@/lib/CMSAuthContext';
+import { Pencil, Trash2 } from 'lucide-react';
 
 export default function CMSProjetos() {
   const { token } = useCMSAuth();
   const [projetos, setProjetos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isAdding, setIsAdding] = useState(false);
+  const [editingId, setEditingId] = useState(null);
 
   const { register, handleSubmit, reset } = useForm();
 
@@ -26,23 +27,53 @@ export default function CMSProjetos() {
     fetchProjetos();
   }, []);
 
+  const openForm = (proj = null) => {
+    if (proj) {
+      setEditingId(proj.id);
+      reset({ ...proj, tags: proj.tags ? proj.tags.join(', ') : '' });
+    } else {
+      setEditingId('new');
+      reset({});
+    }
+  };
+
+  const closeForm = () => {
+    setEditingId(null);
+    reset({});
+  };
+
   const onSubmit = async (data) => {
+    const formatted = { ...data, tags: data.tags.split(',').map(s => s.trim()) };
+    const method = editingId === 'new' ? 'POST' : 'PUT';
+    if (method === 'PUT') formatted.id = editingId;
+
     try {
-      // Tags -> Array
-      const formatted = { ...data, tags: data.tags.split(',').map(s => s.trim()) };
       const res = await fetch('/api/projetos', {
-        method: 'POST',
+        method,
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(formatted)
       });
       if (res.ok) {
-        setIsAdding(false);
-        reset();
+        closeForm();
         fetchProjetos();
       } else {
-        alert("Erro ao adicionar");
+        alert("Erro ao salvar projeto");
       }
     } catch(err) {
+      alert("Erro na requisição");
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm("Tem certeza que deseja excluir este projeto?")) return;
+    try {
+      const res = await fetch(`/api/projetos?id=${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) fetchProjetos();
+      else alert("Erro ao excluir");
+    } catch(e) {
       alert("Erro na requisição");
     }
   };
@@ -51,12 +82,12 @@ export default function CMSProjetos() {
     <div className="max-w-5xl mx-auto">
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-3xl font-heading text-foreground">Projetos</h2>
-        <button onClick={() => setIsAdding(!isAdding)} className="bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-semibold">
-          {isAdding ? 'Cancelar' : '+ Novo Projeto'}
+        <button onClick={() => editingId ? closeForm() : openForm()} className="bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-semibold">
+          {editingId ? 'Cancelar' : '+ Novo Projeto'}
         </button>
       </div>
 
-      {isAdding && (
+      {editingId && (
         <form onSubmit={handleSubmit(onSubmit)} className="bg-card border border-border rounded-xl p-6 mb-8 space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
@@ -88,7 +119,9 @@ export default function CMSProjetos() {
             <label className="block text-sm text-muted-foreground mb-1">Tags (separadas por vírgula)</label>
             <input {...register('tags', { required: true })} className="w-full bg-background border border-border rounded px-3 py-2 text-foreground" placeholder="React, Node.js, AWS" />
           </div>
-          <button type="submit" className="bg-primary text-primary-foreground font-semibold px-6 py-2 rounded-lg">Salvar Projeto</button>
+          <button type="submit" className="bg-primary text-primary-foreground font-semibold px-6 py-2 rounded-lg">
+            {editingId === 'new' ? 'Salvar Projeto' : 'Atualizar Projeto'}
+          </button>
         </form>
       )}
 
@@ -100,7 +133,7 @@ export default function CMSProjetos() {
                 <th className="px-6 py-3 font-medium">Projeto</th>
                 <th className="px-6 py-3 font-medium">Setor</th>
                 <th className="px-6 py-3 font-medium">Cliente</th>
-                <th className="px-6 py-3 font-medium">Tags</th>
+                <th className="px-6 py-3 font-medium text-right">Ações</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
@@ -109,7 +142,14 @@ export default function CMSProjetos() {
                   <td className="px-6 py-4 font-semibold">{proj.title}</td>
                   <td className="px-6 py-4 text-muted-foreground">{proj.sector}</td>
                   <td className="px-6 py-4 text-muted-foreground">{proj.client}</td>
-                  <td className="px-6 py-4"><span className="truncate block max-w-xs">{proj.tags?.join(', ')}</span></td>
+                  <td className="px-6 py-4 flex items-center justify-end gap-3 text-muted-foreground">
+                    <button onClick={() => openForm(proj)} className="hover:text-primary transition-colors p-1" title="Editar">
+                      <Pencil className="w-4 h-4" />
+                    </button>
+                    <button onClick={() => handleDelete(proj.id)} className="hover:text-destructive transition-colors p-1" title="Excluir">
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
