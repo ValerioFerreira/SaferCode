@@ -9,7 +9,8 @@ import ReactMarkdown from "react-markdown";
 import Navbar from "@/components/landing/Navbar";
 import SharedFooter from "@/components/landing/SharedFooter";
 import { getFingerprint } from "@/lib/fingerprint";
-import { sharePost, buildIntents, copyToClipboard } from "@/lib/shareUtils";
+import { buildIntents, copyToClipboard } from "@/lib/shareUtils";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const COVER_MAP = {
   "Engenharia de Software": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80",
@@ -74,33 +75,17 @@ function LikeButton({ postId, initialLiked, initialCount }) {
 
 // ─── Share Bar ────────────────────────────────────────────────────────────────
 function ShareBar({ title }) {
-  const [showIntents, setShowIntents] = useState(false);
+  const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   // Capture URL once on mount (avoid null/incomplete URL)
   const urlRef = useRef(null);
   if (urlRef.current === null) urlRef.current = window.location.href;
   const url = urlRef.current;
 
-  // Close intent dropdown when clicking outside
-  const containerRef = useRef(null);
-  useEffect(() => {
-    const handler = (e) => {
-      if (containerRef.current && !containerRef.current.contains(e.target)) {
-        setShowIntents(false);
-      }
-    };
-    if (showIntents) document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, [showIntents]);
-
-  const handleShare = async (e) => {
+  const handleShare = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    const result = await sharePost(url, title);
-    if (result.method === 'intents') {
-      setShowIntents(v => !v);
-    }
-    // 'native' and 'cancelled' → do nothing extra
+    setOpen(true);
   };
 
   const handleCopy = async (e) => {
@@ -117,13 +102,13 @@ function ShareBar({ title }) {
   const SOCIALS = [
     { key: 'whatsapp', label: 'WhatsApp', color: '#25D366' },
     { key: 'telegram', label: 'Telegram', color: '#2AABEE' },
-    { key: 'twitter', label: 'X / Twitter', color: '#000' },
+    { key: 'twitter', label: 'X / Twitter', color: '#000000' },
     { key: 'facebook', label: 'Facebook', color: '#1877F2' },
     { key: 'linkedin', label: 'LinkedIn', color: '#0A66C2' },
   ];
 
   return (
-    <div ref={containerRef} className="relative">
+    <div className="relative">
       {/* Button row */}
       <div className="flex items-center gap-3 flex-wrap">
         {/* Share */}
@@ -131,7 +116,7 @@ function ShareBar({ title }) {
           type="button"
           onClick={handleShare}
           className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-200 font-body text-sm font-medium whitespace-nowrap ${
-            showIntents
+            open
               ? "border-primary bg-primary/10 text-primary"
               : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
           }`}
@@ -158,39 +143,59 @@ function ShareBar({ title }) {
         </button>
       </div>
 
-      {/* Intent dropdown */}
-      <AnimatePresence>
-        {showIntents && (
-          <motion.div
-            initial={{ opacity: 0, y: -6, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -6, scale: 0.97 }}
-            transition={{ duration: 0.15 }}
-            className="mt-3 flex flex-wrap gap-2"
-          >
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-sm rounded-2xl border border-border bg-card shadow-2xl shadow-black/30 p-6">
+          <DialogHeader className="mb-4">
+            <DialogTitle className="font-heading text-lg text-foreground">
+              Compartilhar
+            </DialogTitle>
+            <p className="font-body text-sm text-muted-foreground mt-1">
+              Escolha onde deseja compartilhar este conteúdo
+            </p>
+          </DialogHeader>
+
+          <div className="flex flex-col gap-2">
             {SOCIALS.map(s => (
               <a
                 key={s.key}
                 href={intents[s.key]}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => setShowIntents(false)}
-                className="inline-flex items-center px-4 py-1.5 rounded-full text-white text-xs font-body font-semibold hover:opacity-80 transition-opacity"
+                onClick={() => setOpen(false)}
+                className="inline-flex items-center justify-center w-full px-4 py-2.5 rounded-xl text-white text-sm font-body font-semibold hover:opacity-85 transition-opacity"
                 style={{ backgroundColor: s.color }}
               >
                 {s.label}
               </a>
             ))}
+
+            {/* Instagram não tem URL de share — copia o link */}
             <button
               type="button"
-              onClick={(e) => { handleCopy(e); setShowIntents(false); }}
-              className="inline-flex items-center px-4 py-1.5 rounded-full text-white text-xs font-body font-semibold bg-gradient-to-r from-purple-500 to-pink-500 hover:opacity-80 transition-opacity"
+              onClick={async () => { await handleCopy(); setOpen(false); }}
+              className="inline-flex items-center justify-center w-full px-4 py-2.5 rounded-xl text-white text-sm font-body font-semibold bg-gradient-to-r from-purple-500 to-pink-500 hover:opacity-85 transition-opacity"
             >
-              📸 Instagram / Copiar link
+              📸 Instagram — Copiar link
             </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+
+          {/* Divisor */}
+          <div className="mt-4 pt-4 border-t border-border">
+            <button
+              type="button"
+              onClick={async () => { await handleCopy(); setOpen(false); }}
+              className={`inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl border font-body text-sm font-medium transition-all duration-200 ${
+                copied
+                  ? 'border-primary bg-primary/10 text-primary'
+                  : 'border-border text-muted-foreground hover:border-primary/40 hover:text-foreground'
+              }`}
+            >
+              {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+              {copied ? 'Link copiado!' : 'Copiar link'}
+            </button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
@@ -429,6 +434,14 @@ function CommentsSection({ postId, initialComments }) {
   );
 }
 
+// ─── Action Bar (shared between top and bottom) ───
+const ActionBar = ({ post, id, stats }) => (
+  <div className="flex items-center gap-4 py-4 flex-wrap">
+    <LikeButton postId={id} initialLiked={stats.user_liked} initialCount={stats.total_likes} />
+    <ShareBar title={post.title} />
+  </div>
+);
+
 // ─── PostSingle Main ──────────────────────────────────────────────────────────
 export default function PostSingle() {
   const { id } = useParams();
@@ -476,14 +489,6 @@ export default function PostSingle() {
     );
   }
 
-  // ─── Action Bar (shared between top and bottom) ───
-  const ActionBar = () => (
-    <div className="flex items-center gap-4 py-4 flex-wrap">
-      <LikeButton postId={id} initialLiked={stats.user_liked} initialCount={stats.total_likes} />
-      <ShareBar title={post.title} />
-    </div>
-  );
-
   return (
     <div className="min-h-screen bg-background font-body flex flex-col">
       <Navbar />
@@ -517,7 +522,7 @@ export default function PostSingle() {
           )}
 
           {/* TOP Action Bar */}
-          <ActionBar />
+          <ActionBar post={post} id={id} stats={stats} />
 
           {/* Article body */}
           <div className="mt-4 prose prose-invert prose-sm max-w-none font-body text-muted-foreground leading-relaxed
@@ -530,7 +535,7 @@ export default function PostSingle() {
 
           {/* BOTTOM Action Bar */}
           <div className="mt-10 pt-6 border-t border-border">
-            <ActionBar />
+            <ActionBar post={post} id={id} stats={stats} />
           </div>
 
           {/* Comments (fed from the single get-stats call) */}
