@@ -112,10 +112,10 @@ export default function Cases() {
                   <div className="absolute inset-0 bg-gradient-to-t from-card via-card/60 to-transparent" />
                   {/* Sector badge */}
                   <div className="absolute top-4 left-4 flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: c.accentColor + "22" }}>
-                      <c.icon className="w-4 h-4" style={{ color: c.accentColor }} />
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-[#FACC14]/20">
+                      <c.icon className="w-4 h-4 text-[#FACC14]" />
                     </div>
-                    <span className="text-xs font-body font-semibold uppercase tracking-widest" style={{ color: c.accentColor }}>
+                    <span className="text-xs font-body font-semibold uppercase tracking-widest text-[#FACC14]">
                       {c.sector}
                     </span>
                   </div>
@@ -152,7 +152,7 @@ export default function Cases() {
                     {c.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-xs font-body font-medium px-3 py-1 rounded-full border border-border text-muted-foreground"
+                        className="text-xs font-body font-medium px-3 py-1 rounded-full border border-[#FACC14] text-[#FACC14] bg-transparent hover:bg-[#FACC14] hover:text-black transition-colors"
                       >
                         {tag}
                       </span>
