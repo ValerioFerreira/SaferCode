@@ -15,7 +15,7 @@ const COVER_MAP = {
 export default function Conteudos() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   // Dynamic categories from DB (derived after fetch)
   const [availableCategories, setAvailableCategories] = useState([]);
 
@@ -72,13 +72,13 @@ export default function Conteudos() {
         <section className="py-16 lg:py-24 px-6 lg:px-8 text-center max-w-4xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="text-xs font-body font-semibold text-primary uppercase tracking-widest mb-4 block">
-              Portal de Autoridade Técnica
+              Além do Código
             </span>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-foreground mb-6">
-              Insights & Engenharia
+              Tech News & Conteúdos
             </h1>
             <p className="font-body text-muted-foreground text-lg max-w-2xl mx-auto">
-              Perspectivas técnicas, cases e análises de mercado do time SaferCode.
+              Insights, novidades do mercado e conteúdos produzidos pela nossa equipe
             </p>
           </motion.div>
         </section>
@@ -118,11 +118,10 @@ export default function Conteudos() {
               <button
                 type="button"
                 onClick={() => setFilterOpen(v => !v)}
-                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border font-body text-sm font-semibold transition-all duration-200 ${
-                  filterOpen || activeCount > 0
+                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border font-body text-sm font-semibold transition-all duration-200 ${filterOpen || activeCount > 0
                     ? 'border-primary bg-primary/10 text-primary'
                     : 'border-border text-muted-foreground hover:border-primary/40 hover:text-foreground'
-                }`}
+                  }`}
               >
                 <Filter className="w-4 h-4" />
                 Filtrar por tema
@@ -167,18 +166,16 @@ export default function Conteudos() {
                               key={cat}
                               type="button"
                               onClick={() => toggleTheme(cat)}
-                              className={`w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg text-sm font-body font-medium transition-all duration-150 ${
-                                isSelected
+                              className={`w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg text-sm font-body font-medium transition-all duration-150 ${isSelected
                                   ? 'bg-primary/10 text-primary'
                                   : 'text-foreground hover:bg-secondary/40'
-                              }`}
+                                }`}
                             >
                               <span>{cat}</span>
                               <div className="flex items-center gap-2">
                                 <span className="text-xs text-muted-foreground">{count}</span>
-                                <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${
-                                  isSelected ? 'bg-primary border-primary' : 'border-border'
-                                }`}>
+                                <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${isSelected ? 'bg-primary border-primary' : 'border-border'
+                                  }`}>
                                   {isSelected && <Check className="w-2.5 h-2.5 text-white" />}
                                 </div>
                               </div>
@@ -253,8 +250,8 @@ export default function Conteudos() {
                       <span className="text-xs font-body text-muted-foreground/60">
                         {post.published_at
                           ? new Date(post.published_at).toLocaleDateString("pt-BR", {
-                              day: "2-digit", month: "long", year: "numeric"
-                            })
+                            day: "2-digit", month: "long", year: "numeric"
+                          })
                           : ""}
                       </span>
                     </div>

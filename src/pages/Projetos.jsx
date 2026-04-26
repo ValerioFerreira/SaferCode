@@ -55,14 +55,14 @@ export default function Projetos() {
             className="max-w-3xl mx-auto"
           >
             <span className="text-xs font-body font-semibold text-primary uppercase tracking-widest mb-4 block">
-              Expertise em Prática
+              Entregas realizadas
             </span>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-foreground mb-6 leading-tight">
               Problemas Reais,{" "}
               <span className="text-primary">Soluções Comprovadas.</span>
             </h1>
             <p className="font-body text-lg text-muted-foreground max-w-2xl mx-auto">
-              Cada projeto representa um desafio real enfrentado por uma organização — e a engenharia de alto nível que aplicamos para resolvê-lo.
+              Projetos desenvolvidos para atender demandas reais, com foco em estabilidade e continuidade.
             </p>
           </motion.div>
         </section>

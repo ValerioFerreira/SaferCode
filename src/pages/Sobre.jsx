@@ -9,21 +9,21 @@ const LOGO_SHORT = "https://media.base44.com/images/public/69dd69e08275bba8ff88a
 const PILLARS = [
   {
     icon: Shield,
-    title: "Experiência Consolidada",
+    title: "Experiência que resolve",
     description:
-      "Uma década de atuação em setores críticos, desde a segurança pública até a automação logística de larga escala. Engenheiros e cientistas de dados com mais de 10 anos de experiência de mercado em Recife, com projetos comprovados em múltiplos verticais.",
+      "Atuação consistente em contextos operacionais complexos, onde falhas não são uma opção. Com o passar dos anos, acumulamos experiência prática em diferentes setores, enfrentando desafios reais. Isso nos permite criar soluções que funcionam bem fora do ambiente controlado.",
   },
   {
     icon: Microscope,
-    title: "Ciência e Engenharia",
+    title: "Rigor técnico aplicado",
     description:
-      "Aplicamos métodos científicos rigorosos para transformar dados em inteligência operacional. Não apenas escrevemos código — arquitetamos sistemas que extraem valor real de dados complexos, com escalabilidade e previsibilidade.",
+      "Tratamos dados e software como disciplinas de engenharia, não apenas como tarefas rotineiras. Estruturamos soluções com base em métodos sólidos, priorizando a previsibilidade, a escalabilidade e a geração de valor mensurável em cada entrega.",
   },
   {
     icon: Eye,
-    title: "Cultura de Transparência",
+    title: "Transparência por padrão",
     description:
-      "Nossa sede em Recife opera como um centro de excelência técnica. A transparência no desenvolvimento é o alicerce da confiança dos nossos clientes — cada linha de código é auditável e documentada.",
+      "Desenvolvimento sem caixa-preta. Nossas soluções são construídas com rastreabilidade, documentação e clareza técnica desde o início. Isso nos permite ter total visibilidade sobre o que está sendo entregue e como o projeto evolui ao longo do tempo.",
   },
 ];
 
@@ -49,7 +49,7 @@ export default function Sobre() {
                 transition={{ duration: 0.7 }}
               >
                 <span className="text-xs font-body font-semibold text-primary uppercase tracking-widest mb-4 block">
-                  Nossa Engenharia
+                  Nossa Empresa
                 </span>
                 <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-8">
                   Fusão entre{" "}
@@ -57,12 +57,17 @@ export default function Sobre() {
                   e Visão Estratégica.
                 </h1>
                 <p className="font-body text-lg text-muted-foreground leading-relaxed mb-10 max-w-xl">
-                  A SaferCode é formada por um núcleo sênior de engenheiros de software e cientistas de dados com mais de 10 anos de experiência de mercado em Recife, focados em transformar dados em inteligência operacional. Nossa equipe combina a precisão da ciência de dados com a robustez da engenharia de sistemas para criar ativos digitais que são, acima de tudo, seguros e auditáveis.
+                  A SaferCode foi criada com base na prática, não apenas na teoria. Somos uma equipe
+                  muito experiente, formada por engenheiros e especialistas que já trabalharam em
+                  diversos setores de negócios e tecnologia por mais de dez anos. Essa experiência nos
+                  permite ir além do código e identificar os pontos críticos e as oportunidades de melhoria
+                  em cada operação. Mais do que simplesmente criar sistemas, nós desenvolvemos soluções
+                  completas que ajudam a organizar, automatizar e dar mais visibilidade aos processos.
                 </p>
                 <div className="flex flex-wrap gap-10">
                   {[
                     { value: "10+", label: "Anos de experiência" },
-                    { value: "50+", label: "Projetos entregues" },
+                    { value: "50+", label: "Projetos desenvolvidos" },
                     { value: "100%", label: "Código auditável" },
                   ].map((stat) => (
                     <div key={stat.label}>
@@ -143,7 +148,7 @@ export default function Sobre() {
             >
               <div className="w-px h-16 bg-primary mx-auto mb-10" />
               <h2 className="font-heading text-3xl md:text-4xl text-foreground mb-6">
-                Sua próxima solução precisa de engenharia de verdade.
+                Será que a sua operação pode ser mais eficiente?
               </h2>
               <a
                 href="/agendar"
